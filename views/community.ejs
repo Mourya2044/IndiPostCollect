@@ -1,0 +1,145 @@
+<%- include('partials/header'); -%>
+
+<div class="container">
+    <div class="header">
+        <!-- <div class="heading-chat">
+            <h2>Chat Rooms</h2>
+            
+        </div> -->
+        <div class="room-list">
+            <button onclick="joinRoom('global')" id="global-btn">Global Community</button>
+            <button onclick="joinRoom('state')" id="state-btn">State Community</button>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-header" id="room-header">
+            <h3 id="room-title">Select a room to start chatting</h3>
+            <div class="users-count">
+                <h3>Online Users: &nbsp;</h3>
+                <h3 id="user-count">0</h3>
+                <!-- <ul id="users-list"></ul> -->
+            </div>
+        </div>
+        <div id="messages"></div>
+        <div id="form">
+            <form id="message">
+                <input id="input" name="input" autocomplete="off" placeholder="Type a message..." />
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>
+
+<script>
+    const socket = io('http://localhost:3000', {
+            extraHeaders: {
+                source: 'community',
+            },
+        });
+
+    let currentUsername = '';
+    let currentRoom = '';
+
+    socket.on('community-authenticated', (data) => {
+        currentUsername = data.username; // Set the global username
+        console.log('Authenticated as:', currentUsername);
+        joinRoom('global');
+    });
+
+    socket.on('connect_error', (err) => {
+        console.error('Connection error:', err.message);
+        alert('Connection to the server failed. Please try again later.');
+    });
+
+    const form = document.querySelector('#message');
+    const input = document.querySelector('#input');
+
+    function joinRoom(room) {
+        if (!currentUsername) {
+            console.error('Username is not set.');
+            alert('Authentication failed. Please log in again.');
+            return;
+        }
+
+        if (currentRoom) {
+            document.getElementById(`${ currentRoom }-btn`).classList.remove('active');
+        }
+        currentRoom = room;
+        document.getElementById(`${ room }-btn`).classList.add('active');
+        document.getElementById('room-title').textContent =
+            room === 'global' ? 'Global Community' : 'State Community';
+
+        socket.emit('join room', { room, user: currentUsername });
+        clearMessages();
+    }
+
+    function clearMessages() {
+        const messages = document.getElementById('messages');
+        messages.innerHTML = '';
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value && currentRoom) {
+            socket.emit('chat message', {
+                msg: input.value,
+                room: currentRoom,
+            });
+            input.value = '';
+        } else {
+            console.error('Message cannot be sent.');
+        }
+    });
+
+    socket.on('chat message', (data) => {
+        const messages = document.getElementById('messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${ data.user === currentUsername ? 'sent' : 'received' }`;
+        messageDiv.innerHTML = `
+            <div class="username">${ data.user }</div>
+            <div class="text-box">
+                <div class="text">${ data.text }</div>
+                <div class="time">${ data.time }</div>
+            </div>`;
+        messages.appendChild(messageDiv);
+        messages.scrollTop = messages.scrollHeight;
+    });
+
+    socket.on('user joined', (data) => {
+        const messages = document.getElementById('messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message system';
+        messageDiv.textContent = `${ data.user } joined the ${ data.room } room.`;
+        messages.appendChild(messageDiv);
+        document.getElementById('user-count').textContent =
+            data.count?.[currentRoom] || '0';
+    });
+
+    socket.on('room joined', (data) => {
+        console.log('Successfully joined room:', data.room);
+    });
+
+    socket.on('user left', (data) => {
+        const messages = document.getElementById('messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message system';
+        messageDiv.textContent = `${ data.user } left the ${ data.room } room.`;
+        messages.appendChild(messageDiv);
+        document.getElementById('user-count').textContent =
+            data.count?.[currentRoom] || '0';
+    });
+
+    function disconnectUser() {
+        if (currentRoom && currentUsername) {
+            socket.emit('disconnect-user', { room: currentRoom, user: currentUsername });
+        }
+    }
+
+    window.addEventListener('beforeunload', disconnectUser);
+    window.addEventListener('hashchange', disconnectUser);
+    window.addEventListener('popstate', disconnectUser);
+</script>

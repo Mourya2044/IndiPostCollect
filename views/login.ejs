@@ -1,0 +1,148 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <!-- Login Page Content -->
+    <section class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="email" name="email" placeholder="Email" required>
+            <span class="email error" style="color: red;"></span> <!-- Error for email -->
+
+            <input type="password" name="password" placeholder="Password" required>
+            <span class="password error" style="color: red;"></span> <!-- Error for password -->
+
+            <button type="submit">Login</button>
+            <a href="#">Forgot Password?</a>
+            <a href="/signup">Create an Account</a>
+        </form>
+    </section>
+
+    <script>
+        const form = document.querySelector('#loginForm');
+        const emailError = document.querySelector('.email.error');
+        const passwordError = document.querySelector('.password.error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Reset errors
+            emailError.textContent = '';
+            passwordError.textContent = '';
+
+            // Get the values
+            const email = form.email.value;
+            const password = form.password.value;
+
+            try {
+                const res = await fetch('/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, password }),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                // Ensure the response is JSON
+                const data = await res.json();
+                // console.log(data);
+
+                // Display errors if any
+                if (data.errors) {
+                    emailError.textContent = data.errors.email || '';
+                    passwordError.textContent = data.errors.password || '';
+                }
+
+                // Redirect if login is successful
+                if (data.user) {
+                    location.assign('/');
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    </script>
+
+    <style>
+        /* Basic reset for margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Centering the login box */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        /* Styling the login container */
+        .login-container {
+            width: 300px;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Styling the title */
+        .login-container h2 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Styling the input fields */
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Styling the login button */
+        .login-container button {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 1rem;
+            border: none;
+            background-color: #B02924;
+            color: white;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Button hover effect */
+        .login-container button:hover {
+            background-color: #B02924;
+        }
+
+        /* Link for password reset or signup */
+        .login-container a {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Link hover effect */
+        .login-container a:hover {
+            color: #B02924;
+        }
+    </style>
+</body>
+
+</html>

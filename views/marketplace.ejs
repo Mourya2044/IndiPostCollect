@@ -1,0 +1,50 @@
+<%- include('partials/header'); -%>
+
+<div class="marketplace-container">
+    <h1 class="marketplace-title">Philatelic Marketplace</h1>
+    <p class="marketplace-description">Browse and buy rare stamps, stamp collections, and philatelic accessories from
+        trusted sellers.</p>
+
+    <div class="marketplace-filters">
+        <h2>Filter Listings</h2>
+        <div class="filter-options">
+            <label><input type="checkbox" name="filter-stamp-type" value="commemorative"> Commemorative Stamps</label>
+            <label><input type="checkbox" name="filter-stamp-type" value="definitive"> Definitive Stamps</label>
+            <label><input type="checkbox" name="filter-stamp-type" value="airmail"> Airmail Stamps</label>
+            <label><input type="checkbox" name="filter-stamp-condition" value="mint"> Mint Condition</label>
+            <label><input type="checkbox" name="filter-stamp-condition" value="used"> Used Condition</label>
+            <label>Price Range:
+                <input type="number" name="filter-price-min" placeholder="Min" min="0">
+                -
+                <input type="number" name="filter-price-max" placeholder="Max" min="0">
+            </label>
+        </div>
+        <button class="filter-button">Apply Filters</button>
+    </div>
+
+    <div class="marketplace-listings">
+        <div class="listing-card">
+            <img src="https://via.placeholder.com/300x200" alt="Stamp Listing Image">
+            <h3 class="listing-title">1955 US Commemorative Stamp - Lincoln</h3>
+            <p class="listing-description">Mint condition commemorative stamp featuring Abraham Lincoln.</p>
+            <p class="listing-price">$25.00</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="listing-card">
+            <img src="https://via.placeholder.com/300x200" alt="Stamp Listing Image">
+            <h3 class="listing-title">1942 Canada Air Mail Stamp - Maple Leaf</h3>
+            <p class="listing-description">Used airmail stamp from Canada with a maple leaf design.</p>
+            <p class="listing-price">$15.00</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="listing-card">
+            <img src="https://via.placeholder.com/300x200" alt="Stamp Listing Image">
+            <h3 class="listing-title">1960s UK Definitive Stamp - Queen Elizabeth II</h3>
+            <p class="listing-description">Mint condition definitive stamp from the UK featuring Queen Elizabeth II.</p>
+            <p class="listing-price">$20.00</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>

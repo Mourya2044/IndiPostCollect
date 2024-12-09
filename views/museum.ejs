@@ -1,0 +1,142 @@
+<%- include('partials/header'); -%>
+
+<section class="hero" id="home">
+    <h1>Welcome to the Stamp Collection</h1>
+    <p>Explore rare and beautiful stamps from around the world, showcasing history, culture, and art.</p>
+</section>
+
+<section class="collection-grid">
+    <div class="category-list">
+        <h2>Stamp Categories</h2>
+        <ul id="category-list">
+            <li data-category="rare-stamps" class="active">Rare Stamps</li>
+            <li data-category="historical-collection">Historical Collection</li>
+            <li data-category="thematic-stamps">Thematic Stamps</li>
+            <li data-category="modern-releases">Modern Releases</li>
+            <li data-category="international-series">International Series</li>
+        </ul>
+    </div>
+    
+    <div class="stamp-collection">
+        <div id="loading">Loading stamps...</div>
+        <div id="error-message">Error loading stamps</div>
+        <div id="stamp-grid" class="stamp-grid"></div>
+    </div>
+</section>
+
+<%- include('partials/footer'); -%>
+
+<script>
+    // Stamp Museum Dynamic Image Loading
+    class StampMuseum {
+        constructor() {
+            this.categoryList = document.getElementById('category-list');
+            this.stampGrid = document.getElementById('stamp-grid');
+            this.loadingIndicator = document.getElementById('loading');
+            this.errorMessage = document.getElementById('error-message');
+
+            // Bind event listeners
+            this.categoryList.addEventListener('click', this.handleCategoryClick.bind(this));
+
+            // Initial load of first category
+            this.loadStamps('rare-stamps');
+        }
+
+        handleCategoryClick(event) {
+            // Remove active class from all categories
+            this.categoryList.querySelectorAll('li').forEach(li =>
+                li.classList.remove('active')
+            );
+
+            // Add active class to clicked category
+            const categoryLi = event.target.closest('li');
+            categoryLi.classList.add('active');
+
+            // Load stamps for selected category
+            const category = categoryLi.dataset.category;
+            this.loadStamps(category);
+        }
+
+        async loadStamps(category) {
+            // Reset UI
+            this.stampGrid.innerHTML = '';
+            this.loadingIndicator.style.display = 'block';
+            this.errorMessage.style.display = 'none';
+
+            try {
+                // Fetch stamps
+                const stamps = await this.fetchStamps(category);
+
+                // If no stamps are returned, display a message
+                if (stamps.length === 0) {
+                    this.errorMessage.style.display = 'block';
+                    this.errorMessage.textContent = 'No stamps found for this category.';
+                } else {
+                    // Render stamps
+                    stamps.forEach(stamp => {
+                        const stampElement = this.createStampElement(stamp);
+                        this.stampGrid.appendChild(stampElement);
+                    });
+                    this.loadingIndicator.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error loading stamps:', error);
+                this.loadingIndicator.style.display = 'none';
+                this.errorMessage.style.display = 'block';
+                this.errorMessage.textContent = 'Error loading stamps';
+            }
+        }
+
+
+        async fetchStamps(category) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/stamps/${ category }`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch stamps');
+                }
+                const stamps = await response.json();
+                // Log the data to make sure it's in the expected format
+                console.log('Fetched stamps:', stamps);
+
+                // Return an empty array if the response is not an array
+                return Array.isArray(stamps) ? stamps : [];
+            } catch (error) {
+                console.error('Error fetching stamps:', error);
+                // Return an empty array in case of error
+                return [];
+            }
+        }
+
+
+        createStampElement(stamp) {
+            const stampItem = document.createElement('div');
+            stampItem.className = 'stamp-item';
+
+            const img = document.createElement('img');
+            img.src = stamp.image;
+            img.alt = stamp.name;
+
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'stamp-item-info';
+
+            const nameElement = document.createElement('h3');
+            nameElement.textContent = stamp.name;
+
+            const descElement = document.createElement('p');
+            descElement.textContent = stamp.description;
+
+            infoDiv.appendChild(nameElement);
+            infoDiv.appendChild(descElement);
+
+            stampItem.appendChild(img);
+            stampItem.appendChild(infoDiv);
+
+            return stampItem;
+        }
+    };
+
+    // Initialize the Stamp Museum
+    document.addEventListener('DOMContentLoaded', () => {
+        new StampMuseum();
+    });
+</script>
