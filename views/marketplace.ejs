@@ -1,50 +1,80 @@
 <%- include('partials/header'); -%>
 
 <div class="marketplace-container">
-    <h1 class="marketplace-title">Philatelic Marketplace</h1>
-    <p class="marketplace-description">Browse and buy rare stamps, stamp collections, and philatelic accessories from
-        trusted sellers.</p>
+    <header class="marketplace-header">
+        <h1 class="marketplace-title">Stamp Collectors' Haven</h1>
+        <p class="marketplace-description">Explore a curated collection of rare and historical stamps from around the world. Discover passionate philately with our exclusive stamp selections.</p>
+    </header>
 
-    <div class="marketplace-filters">
-        <h2>Filter Listings</h2>
+    <section class="marketplace-filters">
         <div class="filter-options">
-            <label><input type="checkbox" name="filter-stamp-type" value="commemorative"> Commemorative Stamps</label>
-            <label><input type="checkbox" name="filter-stamp-type" value="definitive"> Definitive Stamps</label>
-            <label><input type="checkbox" name="filter-stamp-type" value="airmail"> Airmail Stamps</label>
-            <label><input type="checkbox" name="filter-stamp-condition" value="mint"> Mint Condition</label>
-            <label><input type="checkbox" name="filter-stamp-condition" value="used"> Used Condition</label>
-            <label>Price Range:
-                <input type="number" name="filter-price-min" placeholder="Min" min="0">
-                -
-                <input type="number" name="filter-price-max" placeholder="Max" min="0">
-            </label>
-        </div>
-        <button class="filter-button">Apply Filters</button>
-    </div>
+            <fieldset class="filter-group">
+                <legend>Stamp Types</legend>
+                <label><input type="checkbox" name="filter-stamp-type" value="commemorative"> Commemorative</label>
+                <label><input type="checkbox" name="filter-stamp-type" value="definitive"> Definitive</label>
+                <label><input type="checkbox" name="filter-stamp-type" value="airmail"> Airmail</label>
+            </fieldset>
 
-    <div class="marketplace-listings">
-        <div class="listing-card">
-            <img src="https://via.placeholder.com/300x200" alt="Stamp Listing Image">
-            <h3 class="listing-title">1955 US Commemorative Stamp - Lincoln</h3>
-            <p class="listing-description">Mint condition commemorative stamp featuring Abraham Lincoln.</p>
-            <p class="listing-price">$25.00</p>
-            <button class="add-to-cart">Add to Cart</button>
+            <fieldset class="filter-group">
+                <legend>Condition</legend>
+                <label><input type="checkbox" name="filter-stamp-condition" value="mint"> Mint</label>
+                <label><input type="checkbox" name="filter-stamp-condition" value="used"> Used</label>
+            </fieldset>
+
+            <fieldset class="filter-group">
+                <legend>Price Range</legend>
+                <input type="number" name="filter-price-min" placeholder="Min Price" min="0">
+                <input type="number" name="filter-price-max" placeholder="Max Price" min="0">
+            </fieldset>
         </div>
-        <div class="listing-card">
-            <img src="https://via.placeholder.com/300x200" alt="Stamp Listing Image">
-            <h3 class="listing-title">1942 Canada Air Mail Stamp - Maple Leaf</h3>
-            <p class="listing-description">Used airmail stamp from Canada with a maple leaf design.</p>
-            <p class="listing-price">$15.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-        <div class="listing-card">
-            <img src="https://via.placeholder.com/300x200" alt="Stamp Listing Image">
-            <h3 class="listing-title">1960s UK Definitive Stamp - Queen Elizabeth II</h3>
-            <p class="listing-description">Mint condition definitive stamp from the UK featuring Queen Elizabeth II.</p>
-            <p class="listing-price">$20.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-    </div>
+        <button class="filter-button">
+            <i class="fas fa-filter"></i> Apply Filters
+        </button>
+    </section>
+
+    <main class="marketplace-listings">
+        <article class="listing-card">
+            <div class="listing-image">
+                <img src="https://via.placeholder.com/300x250" alt="Lincoln Commemorative Stamp">
+            </div>
+            <div class="listing-content">
+                <h3 class="listing-title">1955 US Lincoln Commemorative</h3>
+                <p class="listing-description">Pristine mint condition commemorative stamp featuring Abraham Lincoln. A must-have for US presidential stamp collectors.</p>
+                <div class="listing-price">$25.00</div>
+                <button class="add-to-cart">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
+        </article>
+
+        <article class="listing-card">
+            <div class="listing-image">
+                <img src="https://via.placeholder.com/300x250" alt="Canada Airmail Stamp">
+            </div>
+            <div class="listing-content">
+                <h3 class="listing-title">1942 Canada Maple Leaf Airmail</h3>
+                <p class="listing-description">Vintage airmail stamp showcasing the iconic Canadian maple leaf. Well-preserved historical piece from World War II era.</p>
+                <div class="listing-price">$15.00</div>
+                <button class="add-to-cart">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
+        </article>
+
+        <article class="listing-card">
+            <div class="listing-image">
+                <img src="https://via.placeholder.com/300x250" alt="Queen Elizabeth II Stamp">
+            </div>
+            <div class="listing-content">
+                <h3 class="listing-title">1960s UK Queen Elizabeth II Definitive</h3>
+                <p class="listing-description">Immaculate mint condition definitive stamp featuring Queen Elizabeth II. A royal addition to any Commonwealth collection.</p>
+                <div class="listing-price">$20.00</div>
+                <button class="add-to-cart">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
+        </article>
+    </main>
 </div>
 
 <%- include('partials/footer'); -%>
