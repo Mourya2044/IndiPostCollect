@@ -1,3 +1,5 @@
+//not required rn
+
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
 const chatController = require("../controllers/chatController");
