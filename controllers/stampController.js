@@ -5,10 +5,10 @@ const getStamps = (req, res) => {
     // Mock stamp data
     const stampCollections = {
         'rare-stamps': [
-            { name: 'Penny Black', description: 'First adhesive postage stamp', image: 'https://placehold.co/200' },
-            { name: 'Inverted Jenny', description: 'Rare American stamp', image: 'https://placehold.co/200' },
-            { name: 'Treskilling Yellow', description: 'Rare Swedish stamp', image: 'https://placehold.co/200' },
-            { name: 'Mauritius Post Office', description: 'Historic island stamp', image: 'https://placehold.co/200' }
+            { name: 'Penny Black', description: 'First adhesive postage stamp', image: '/images/stamps/penny-black.jpeg' },
+            { name: 'Inverted Jenny', description: 'Rare American stamp', image: '/images/stamps/inverted-jenny.jpeg' },
+            { name: 'Treskilling Yellow', description: 'Rare Swedish stamp', image: '/images/stamps/Treskilling-Yellow.jpeg' },
+            { name: 'Mauritius Post Office', description: 'Historic island stamp', image: '/images/stamps/Mauritius-Post-Office.jpeg' }
         ],
         'historical-collection': [
             { name: 'World War II Commemoration', description: '1945 memorial stamp', image: 'https://placehold.co/200' },
