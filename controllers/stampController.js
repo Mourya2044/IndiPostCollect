@@ -7,14 +7,14 @@ const stampCollections = {
         { id: '4', name: 'Mauritius Post Office', description: 'Historic island stamp', image: '/images/stamps/Mauritius-Post-Office.jpeg' }
     ],
     'historical-collection': [
-        { id: '5', name: 'World War II Commemoration', description: '1945 memorial stamp', image: 'https://placehold.co/200' },
-        { id: '6', name: 'Moon Landing', description: 'First lunar landing stamp', image: 'https://placehold.co/200' },
-        { id: '7', name: 'Olympic Games', description: 'Historic Olympic moments', image: 'https://placehold.co/200' }
+        { id: '5', name: 'British India 1941 Post Mail', description: '1941 POSTAL MAIL ISSUE 6 SIX ANNA MAIL STEAMER', image: '/images/stamps/BRITISH INDIA 1941 POSTAL MAIL ISSUE 6 SIX ANNA MAIL STEAMER.png' },
+        { id: '6', name: 'King George', description: 'india 1937 king george VI 5 Re Service Postage stamp', image: '/images/stamps/india 1937 king george VI 5 Re Service Postage stamp.png' },
+        { id: '7', name: 'Hyderabad', description: 'Postage & Reciept Stamp of Hyderabad State 1 Anna', image: '/images/stamps/Postage & Reciept Stamp of Hyderabad State 1 Anna Black-N-White.png' }
     ],
     'thematic-stamps': [
-        { id: '8', name: 'Wildlife Series', description: 'Endangered species', image: 'https://placehold.co/200' },
-        { id: '9', name: 'Space Exploration', description: 'Cosmic themes', image: 'https://placehold.co/200' },
-        { id: '10', name: 'Art Masters', description: 'Famous paintings', image: 'https://placehold.co/200' }
+        { id: '8', name: 'Wildlife Series', description: 'Endangered species', image: '/images/stamps/475_Tiger.png' },
+        { id: '9', name: 'Space Exploration', description: 'Cosmic themes', image: '/images/stamps/space.jpeg' },
+        { id: '10', name: 'Others', description: 'Famous paintings', image: '/images/stamps/Passport_photo.png' }
     ],
     'modern-releases': [
         { id: '11', name: 'Digital Era', description: 'Tech-themed stamps', image: 'https://placehold.co/200' },
