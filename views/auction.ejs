@@ -51,11 +51,7 @@
 
 <script>
     // Connect to the Socket.io server
-    const socket = io('http://localhost:3000', {
-            extraHeaders: {
-                source: 'auction',
-            },
-        }); // Connect to the server (default is localhost:3000)
+    const socket = io(); // Connect to the server (default is localhost:3000)
 
     let currentBidderName = null;
 

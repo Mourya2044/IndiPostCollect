@@ -35,11 +35,7 @@
 <%- include('partials/footer'); -%>
 
 <script>
-    const socket = io('http://localhost:3000', {
-            extraHeaders: {
-                source: 'community',
-            },
-        });
+    const socket = io();
 
     let currentUsername = '';
     let currentRoom = '';
