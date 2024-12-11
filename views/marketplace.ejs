@@ -11,28 +11,46 @@
         <div class="filter-options">
             <fieldset class="filter-group">
                 <legend>Stamp Types</legend>
-                <label><input type="checkbox" name="filter-stamp-type" value="rare-stamps">Rare stamps</label>
-                <label><input type="checkbox" name="filter-stamp-type" value="historical-collection">Historical
-                    Collection</label>
-                <label><input type="checkbox" name="filter-stamp-type" value="thematic-stamps">Thematic
-                    Stamps</label>
-                <label><input type="checkbox" name="filter-stamp-type" value="modern-releases">Modern
-                    Releases</label>
-                <label><input type="checkbox" name="filter-stamp-type" value="international-series">International
-                    Series</label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="filter-stamp-type" value="indian-stamps">
+                    <span>Indian Stamps</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="filter-stamp-type" value="rare-stamps">
+                    <span>Rare Stamps</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="filter-stamp-type" value="historical-collection">
+                    <span>Historical Collection</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="filter-stamp-type" value="thematic-stamps">
+                    <span>Thematic Stamps</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="filter-stamp-type" value="modern-releases">
+                    <span>Modern Releases</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="filter-stamp-type" value="international-series">
+                    <span>International Series</span>
+                </label>
             </fieldset>
+
 
             <fieldset class="filter-group">
                 <legend>Condition</legend>
-                <label><input type="checkbox" name="filter-stamp-condition" value="mint"> Mint</label>
-                <label><input type="checkbox" name="filter-stamp-condition" value="used"> Used</label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="filter-stamp-condition" value="mint">
+                    <span>Mint</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="filter-stamp-condition" value="used">
+                    <span>Used</span>
+                </label>
             </fieldset>
 
-            <fieldset class="filter-group">
-                <legend>Price Range</legend>
-                <input type="number" name="filter-price-min" placeholder="Min Price" min="0">
-                <input type="number" name="filter-price-max" placeholder="Max Price" min="0">
-            </fieldset>
+
         </div>
         <button class="filter-button">
             <i class="fas fa-filter"></i> Apply Filters
@@ -172,7 +190,7 @@
         <div class="listing-content">
             <h3 class="listing-title">${stamp.name}</h3>
             <p class="listing-description">${stamp.description}</p>
-            <div class="listing-price">$${stamp.price}</div>
+            <div class="listing-price">₹${stamp.price}</div>
         </div>
     </a>`;
 }

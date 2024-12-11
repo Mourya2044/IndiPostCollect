@@ -61,7 +61,7 @@ module.exports.signup_post = async (req, res) => {
         const user = await User.create({ username, email, password, mobile, firstname, lastname, address, state, district, city, pincode });
         console.log(user);
         
-        const token = createToken(user._id, user.email);
+        const token = createToken(user._id, user.username);
         res.cookie('jwt', token, {
             httpOnly: true,
             maxAge: maxAge * 1000,
@@ -83,7 +83,7 @@ module.exports.login_post = async (req, res) => {
 
     try {
         const user = await User.login(email, password); // Ensure this method exists in your User model
-        const token = createToken(user._id, user.email);
+        const token = createToken(user._id, user.username);
         res.cookie('jwt', token, {
             httpOnly: true,
             maxAge: maxAge * 1000,

@@ -563,7 +563,7 @@ html {
 .marketplace-header {
     text-align: center;
     margin-bottom: 30px;
-    background: var(--secondary-color);
+    background: var(--primary-color);
     color: white;
     padding: 30px;
     /* border-radius: 10px; */
@@ -601,10 +601,10 @@ html {
 }
 
 .filter-group {
-    background-color: #FFF5EE; /* Seashell */
+    background-color: #eefffe; /* Seashell */
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid var(--secondary-color);
+    border: 1px solid var(--primary-color);
 }
 
 .filter-group legend {
@@ -630,6 +630,58 @@ html {
 .filter-button:hover {
     background-color: var(--accent-color);
     transform: translateY(-2px);
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-checkbox:hover {
+    background-color: #f0f0f0;
+    border-color: #aaa;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #bbb;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked {
+    background-color: #333;
+    border-color: #333;
+    position: relative;
+}
+
+.custom-checkbox input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    left: 5px;
+    top: 1px;
+}
+
+.custom-checkbox span {
+    font-size: 1rem;
+    color: #333;
 }
 
 .marketplace-listings {

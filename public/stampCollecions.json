@@ -1,0 +1,161 @@
+{
+    "indian-stamps": [
+        {
+            "id": "george-vi-dak-runner",
+            "name": "George VI Dak Runner stamp",
+            "description": "Issued in 1937, it is part of a definitive series that highlighted various modes of mail transport in pre-independence India. This particular stamp features a Dak Runner, symbolizing the traditional method of mail delivery by runners in rural areas before mechanized transport became widespread.",
+            "image": "/images/stamps/george-vi-dak-runner.jpg",
+            "price": 35
+        },
+        {
+            "id": "3-annas-king-george-vi",
+            "name": "3 Annas King George VI stamp",
+            "description": "Issued in 1937, it is a classic collectible that was issued during the reign of King George VI. These stamps were typically definitive issues, meaning they were produced for regular use rather than for special commemorations. The design featured a portrait of King George VI and was engraved with intricate details, reflecting the craftsmanship of the period.",
+            "image": "/images/stamps/GEORGE VI ~ 2 As 6 Ps ~ DAK BULLOCK CART.png",
+            "price": 1000
+        },
+        {
+            "id": "india-3a-yellow-green-1937",
+            "name": "India 3a Yellow-Green 1937",
+            "description": "A classic stamp featuring King George VI in a yellow-green shade, part of the definitive issues of 1937. Known for its artistic details, it symbolizes the rich philatelic history of colonial India.",
+            "image": "/images/stamps/Postage Stamp of George V 6 Annas Brown-Ochre Colour –.png",
+            "price": 700
+        },
+        {
+            "id": "india-1937-mail-train",
+            "name": "India 1937 Mail Train",
+            "description": "This stamp showcases a mail train, emphasizing the pivotal role of the Indian railway system in mail transport during the colonial period. It remains a significant collectible among philatelists.",
+            "image": "/images/stamps/BRITISH INDIA 1941 POSTAL MAIL ISSUE 6 SIX ANNA MAIL STEAMER.png",
+            "price": 400
+        },
+        {
+            "id": "india-10-rupee-king-george-vi",
+            "name": "India 10 Rupee King George VI",
+            "description": "A high-value stamp from the King George VI definitive series, notable for its unique design and representation of colonial India's postal history.",
+            "image": "/images/stamps/india 1937 king george VI 10 Re Service Postage stamp.png",
+            "price": 3000
+        },
+        {
+            "id": "victory-stamp-of-india-1946",
+            "name": "Victory Stamp of India (1946)",
+            "description": "Released to commemorate the Allied victory in World War II, this stamp features the iconic 'V for Victory' emblem, symbolizing hope and triumph.",
+            "image": "/images/stamps/India1946 king george 6 wwII victory stamp 1 and half anna.jpg",
+            "price": 200
+        },
+        {
+            "id": "hyderabad-1945-one-anna-blue-victory-stamp",
+            "name": "Hyderabad 1945 One Anna Blue Victory Stamp",
+            "description": "Issued by the princely state of Hyderabad to celebrate World War II victory, this stamp is admired for its simple yet significant design.",
+            "image": "/images/stamps/Postage & Reciept Stamp of Hyderabad State 1 Anna Black-N-White.png",
+            "price": 200
+        }
+    ],
+    "rare-stamps": [
+        {
+            "id": "penny-black",
+            "name": "Penny Black",
+            "description": "First adhesive postage stamp",
+            "image": "/images/stamps/penny-black.jpeg",
+            "price": "5,000"
+        },
+        {
+            "id": "inverted-jenny",
+            "name": "Inverted Jenny",
+            "description": "Rare American stamp",
+            "image": "/images/stamps/inverted-jenny.jpeg",
+            "price": "10,000"
+        },
+        {
+            "id": "treskilling-yellow",
+            "name": "Treskilling Yellow",
+            "description": "Rare Swedish stamp",
+            "image": "/images/stamps/Treskilling-Yellow.jpeg",
+            "price": "2,000,000"
+        },
+        {
+            "id": "mauritius-post-office",
+            "name": "Mauritius Post Office",
+            "description": "Historic island stamp",
+            "image": "/images/stamps/Mauritius-Post-Office.jpeg",
+            "price": "1,000,000"
+        }
+    ],
+    "historical-collection": [
+        {
+            "id": "british-india-1941-post-mail",
+            "name": "British India 1941 Post Mail",
+            "description": "1941 POSTAL MAIL ISSUE 6 SIX ANNA MAIL STEAMER",
+            "image": "/images/stamps/BRITISH INDIA 1941 POSTAL MAIL ISSUE 6 SIX ANNA MAIL STEAMER.png",
+            "price": "500"
+        },
+        {
+            "id": "king-george-vi-5-re-service-postage",
+            "name": "King George VI 5 Re Service Postage",
+            "description": "India 1937 king george VI 5 Re Service Postage stamp",
+            "image": "/images/stamps/india 1937 king george VI 5 Re Service Postage stamp.png",
+            "price": "200"
+        },
+        {
+            "id": "hyderabad-1-anna-postage-receipt",
+            "name": "Hyderabad 1 Anna Postage & Receipt Stamp",
+            "description": "Postage & Reciept Stamp of Hyderabad State 1 Anna",
+            "image": "/images/stamps/Postage & Reciept Stamp of Hyderabad State 1 Anna Black-N-White.png",
+            "price": "300"
+        }
+    ],
+    "thematic-stamps": [
+        {
+            "id": "wildlife-series",
+            "name": "Wildlife Series",
+            "description": "Endangered species",
+            "image": "/images/stamps/475_Tiger.png",
+            "price": "50"
+        },
+        {
+            "id": "space-exploration",
+            "name": "Space Exploration",
+            "description": "Cosmic themes",
+            "image": "/images/stamps/space.jpeg",
+            "price": "30"
+        },
+        {
+            "id": "famous-paintings",
+            "name": "Famous Paintings",
+            "description": "Famous paintings",
+            "image": "https://placehold.co/200",
+            "price": "100"
+        }
+    ],
+    "modern-releases": [
+        {
+            "id": "digital-era",
+            "name": "Digital Era",
+            "description": "Tech-themed stamps",
+            "image": "https://placehold.co/200",
+            "price": "5"
+        },
+        {
+            "id": "climate-change",
+            "name": "Climate Change",
+            "description": "Environmental awareness",
+            "image": "https://placehold.co/200",
+            "price": "7"
+        }
+    ],
+    "international-series": [
+        {
+            "id": "world-cultures",
+            "name": "World Cultures",
+            "description": "Global heritage",
+            "image": "https://placehold.co/200",
+            "price": "8"
+        },
+        {
+            "id": "united-nations",
+            "name": "United Nations",
+            "description": "UN commemorative",
+            "image": "https://placehold.co/200",
+            "price": "10"
+        }
+    ]
+}
