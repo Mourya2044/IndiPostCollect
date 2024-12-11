@@ -7,59 +7,131 @@
 </head>
 
 <body>
-    <!-- Login Page Content -->
+    <!-- Sign Up Page Content -->
     <section class="login-container">
         <h2>Sign Up</h2>
-        <form id="loginForm">
-            <input type="email" name="email" placeholder="Email" required>
-            <span class="email error" style="color: red;"></span> <!-- Error for email -->
+        <form id="signupForm">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
 
-            <input type="password" name="password" placeholder="Password" required>
-            <span class="password error" style="color: red;"></span> <!-- Error for password -->
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="mobile">Mobile</label>
+                <input type="number" name="mobile" placeholder="Mobile" required>
+            </div>
+
+            <div class="input-group">
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" placeholder="First name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" placeholder="Last name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="address">Address</label>
+                <input type="text" name="address" placeholder="Address" required>
+            </div>
+
+            <div class="input-group">
+                <label for="state">State</label>
+                <select name="state" required>
+                    <option value="">Select State</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="district">District</label>
+                <input type="text" name="district" placeholder="District" required>
+            </div>
+
+            <div class="input-group">
+                <label for="city">City</label>
+                <input type="text" name="city" placeholder="City" required>
+            </div>
+
+            <div class="input-group">
+                <label for="pincode">Pincode</label>
+                <input type="number" name="pincode" placeholder="Pincode" required>
+            </div>
 
             <button type="submit">Sign Up</button>
-            <a href="/login">Already have an account? Login</a>
         </form>
     </section>
 
+
     <script>
-        const form = document.querySelector('form')
-        const emailError = document.querySelector('.email.error')
-        const passwordError = document.querySelector('.password.error')
+        const form = document.querySelector('#signupForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault()
+                // Get the form data
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
 
-            // reset errors
-            emailError.textContent = ''
-            passwordError.textContent = ''
+                try {
+                    const res = await fetch('/signup', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const result = await res.json();
+                    console.log(result);
 
-            // get the values
-            const email = form.email.value
-            const password = form.password.value
-
-            try {
-                const res = await fetch('/signup', {
-                    method: 'POST',
-                    body: JSON.stringify({ email, password }),
-                    headers: { 'Content-Type': 'application/json' }
-                })
-                const data = await res.json()
-                console.log(data);
-                if (data.errors) {
-                    emailError.textContent = data.errors.email
-                    passwordError.textContent = data.errors.password
+                    // Handle errors or success
+                    if (result.errors) {
+                        Object.keys(result.errors).forEach((key) => {
+                            document.querySelector(`.${ key }.error`).textContent = result.errors[key];
+                        });
+                    } else if (result.user) {
+                        location.assign('/');
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
-                if (data.user) {
-                    location.assign('/')
-                }
+            });
 
-            } catch (error) {
-                console.log(error)
-
-            }
-
-        })
     </script>
 
 
@@ -71,7 +143,7 @@
             box-sizing: border-box;
         }
 
-        /* Centering the login box */
+        /* Centering the form container */
         body {
             display: flex;
             justify-content: center;
@@ -81,14 +153,14 @@
             background-color: #f4f4f9;
         }
 
-        /* Styling the login container */
+        /* Styling the form container */
         .login-container {
-            width: 300px;
+            width: 50%;
             padding: 2rem;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
+            margin: 5rem auto;
         }
 
         /* Styling the title */
@@ -97,18 +169,30 @@
             color: #333;
         }
 
-        /* Styling the input fields */
-        .login-container input[type="email"],
-        .login-container input[type="password"] {
-            width: 100%;
+        /* Styling the input groups */
+        .input-group {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .input-group label {
+            width: 150px;
+            margin-right: 1rem;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            flex-grow: 1;
             padding: 0.5rem;
-            margin: 0.5rem 0;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        /* Styling the login button */
-        .login-container button {
+        /* Styling the submit button */
+        button {
             width: 100%;
             padding: 0.5rem;
             margin-top: 1rem;
@@ -121,22 +205,8 @@
         }
 
         /* Button hover effect */
-        .login-container button:hover {
+        button:hover {
             background-color: #B02924;
-        }
-
-        /* Link for password reset or signup */
-        .login-container a {
-            display: block;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #333;
-            text-decoration: none;
-        }
-
-        /* Link hover effect */
-        .login-container a:hover {
-            color: #B02924;
         }
     </style>
 </body>

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 // handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code);
-    let errors = { email: '', password: '' };
+    let errors = { email: '', password: '', mobile: '' };
 
     // incorrect email
     if (err.message.includes('incorrect email')) {
@@ -15,6 +15,11 @@ const handleErrors = (err) => {
     if (err.message.includes('incorrect password')) {
         errors.password = 'That password is incorrect';
     }
+
+    if (err.message.includes('mobile')) {
+        errors.mobile = 'Invalid mobile number';
+    }
+
 
     // duplicate error code
     if (err.code === 11000) {
@@ -48,13 +53,14 @@ module.exports.login_get = (req, res) => {
 }
 
 module.exports.signup_post = async (req, res) => {
-    const { email, password } = req.body;
-
+    const { username, email, password, mobile, firstname, lastname, address, state, district, city, pincode } = req.body;   
     res.cookie('jwt', '', { maxAge: 1 }); // Clear the JWT cookie
     // res.cookie('username', '', { maxAge: 1 }); // Clear the username cookie
 
     try {
-        const user = await User.create({ email, password });
+        const user = await User.create({ username, email, password, mobile, firstname, lastname, address, state, district, city, pincode });
+        console.log(user);
+        
         const token = createToken(user._id, user.email);
         res.cookie('jwt', token, {
             httpOnly: true,
