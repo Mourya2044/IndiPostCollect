@@ -1,154 +1,180 @@
 <%- include('partials/header'); -%>
 
-    <div class="marketplace-container">
-        <header class="marketplace-header">
-            <h1 class="marketplace-title">Stamp Collectors' Haven</h1>
-            <p class="marketplace-description">Explore a curated collection of rare and historical stamps from around
-                the world. Discover passionate philately with our exclusive stamp selections.</p>
-        </header>
+<div class="marketplace-container">
+    <header class="marketplace-header">
+        <h1 class="marketplace-title">Stamp Collectors' Haven</h1>
+        <p class="marketplace-description">Explore a curated collection of rare and historical stamps from around
+            the world. Discover passionate philately with our exclusive stamp selections.</p>
+    </header>
 
-        <section class="marketplace-filters">
-            <div class="filter-options">
-                <fieldset class="filter-group">
-                    <legend>Stamp Types</legend>
-                    <label><input type="checkbox" name="filter-stamp-type" value="rare-stamps">Rare stamps</label>
-                    <label><input type="checkbox" name="filter-stamp-type" value="historical-collection">Historical
-                        Collection</label>
-                    <label><input type="checkbox" name="filter-stamp-type" value="thematic-stamps">Thematic
-                        Stamps</label>
-                    <label><input type="checkbox" name="filter-stamp-type" value="modern-releases">Modern
-                        Releases</label>
-                    <label><input type="checkbox" name="filter-stamp-type" value="international-series">International
-                        Series</label>
-                </fieldset>
+    <section class="marketplace-filters">
+        <div class="filter-options">
+            <fieldset class="filter-group">
+                <legend>Stamp Types</legend>
+                <label><input type="checkbox" name="filter-stamp-type" value="rare-stamps">Rare stamps</label>
+                <label><input type="checkbox" name="filter-stamp-type" value="historical-collection">Historical
+                    Collection</label>
+                <label><input type="checkbox" name="filter-stamp-type" value="thematic-stamps">Thematic
+                    Stamps</label>
+                <label><input type="checkbox" name="filter-stamp-type" value="modern-releases">Modern
+                    Releases</label>
+                <label><input type="checkbox" name="filter-stamp-type" value="international-series">International
+                    Series</label>
+            </fieldset>
 
-                <fieldset class="filter-group">
-                    <legend>Condition</legend>
-                    <label><input type="checkbox" name="filter-stamp-condition" value="mint"> Mint</label>
-                    <label><input type="checkbox" name="filter-stamp-condition" value="used"> Used</label>
-                </fieldset>
+            <fieldset class="filter-group">
+                <legend>Condition</legend>
+                <label><input type="checkbox" name="filter-stamp-condition" value="mint"> Mint</label>
+                <label><input type="checkbox" name="filter-stamp-condition" value="used"> Used</label>
+            </fieldset>
 
-                <fieldset class="filter-group">
-                    <legend>Price Range</legend>
-                    <input type="number" name="filter-price-min" placeholder="Min Price" min="0">
-                    <input type="number" name="filter-price-max" placeholder="Max Price" min="0">
-                </fieldset>
-            </div>
-            <button class="filter-button">
-                <i class="fas fa-filter"></i> Apply Filters
-            </button>
-        </section>
+            <fieldset class="filter-group">
+                <legend>Price Range</legend>
+                <input type="number" name="filter-price-min" placeholder="Min Price" min="0">
+                <input type="number" name="filter-price-max" placeholder="Max Price" min="0">
+            </fieldset>
+        </div>
+        <button class="filter-button">
+            <i class="fas fa-filter"></i> Apply Filters
+        </button>
+    </section>
 
-        <div id="loading-indicator" style="display:none;">Loading stamps...</div>
-        <div id="error-message" style="display:none;">Error loading stamps</div>
+    <div id="loading-indicator" style="display:none;">Loading stamps...</div>
+    <div id="error-message" style="display:none;">Error loading stamps</div>
 
-        <main class="marketplace-listings" id="marketplace-listings">
-            <!-- Dynamic content will be added here -->
-        </main>
-    </div>
+    <main class="marketplace-listings" id="marketplace-listings">
+        <!-- Dynamic content will be added here -->
+    </main>
+</div>
 
-    <%- include('partials/footer'); -%>
+<%- include('partials/footer'); -%>
 
-        <script>
-            const stampsList = document.getElementById("marketplace-listings");
-            const loadingIndicator = document.getElementById("loading-indicator");
-            const errorMessage = document.getElementById("error-message");
+<script>
+    const stampsList = document.getElementById("marketplace-listings");
+    const loadingIndicator = document.getElementById("loading-indicator");
+    const errorMessage = document.getElementById("error-message");
 
-            document.querySelector('.filter-button').addEventListener('click', function () {
-                // Collect checked checkboxes
-                const stampTypes = Array.from(document.querySelectorAll('input[name="filter-stamp-type"]:checked'))
-                    .map(input => input.value);
-                const conditions = Array.from(document.querySelectorAll('input[name="filter-stamp-condition"]:checked'))
-                    .map(input => input.value);
+    loadAllStamps();
 
-                // Create filter data object
-                const filterData = {
-                    stampTypes,
-                    conditions
-                };
+    document.querySelector('.filter-button').addEventListener('click', function () {
+        // Collect checked checkboxes
+        const stampTypes = Array.from(document.querySelectorAll('input[name="filter-stamp-type"]:checked'))
+            .map(input => input.value);
+        const conditions = Array.from(document.querySelectorAll('input[name="filter-stamp-condition"]:checked'))
+            .map(input => input.value);
 
-                console.log('Filters Applied:', filterData);
+        // Create filter data object
+        const filterData = {
+            stampTypes,
+            conditions
+        };
 
-                // Perform your filtering function
-                applyFilters(filterData);
-            });
+        console.log('Filters Applied:', filterData);
 
-            async function applyFilters(filterData) {
-                const { stampTypes } = filterData;
+        // Perform your filtering function
+        applyFilters(filterData);
+    });
 
-                // Clear the current listings
-                stampsList.innerHTML = '';
-                errorMessage.style.display = 'none';
+    async function applyFilters(filterData) {
+        const { stampTypes } = filterData;
 
-                if (stampTypes.length === 0) {
-                    errorMessage.style.display = 'block';
-                    errorMessage.textContent = 'Please select at least one stamp type to filter.';
-                    return;
-                }
+        // Clear the current listings
+        stampsList.innerHTML = '';
+        errorMessage.style.display = 'none';
 
-                loadingIndicator.style.display = 'block';
+        loadingIndicator.style.display = 'block';
 
-                // Fetch and display stamps for each selected type
-                for (const type of stampTypes) {
-                    await loadStamps(type);
-                }
-
-                loadingIndicator.style.display = 'none';
+        // If no filters are selected, load all stamps
+        if (stampTypes.length === 0) {
+            await loadAllStamps();
+        } else {
+            // Fetch and display stamps for each selected type
+            for (const type of stampTypes) {
+                await loadStamps(type);
             }
+        }
 
-            async function loadStamps(category) {
-                try {
-                    // Fetch stamps
-                    const stamps = await fetchStamps(category);
+        loadingIndicator.style.display = 'none';
+    }
 
-                    // If no stamps are returned, display a message
-                    if (stamps.length === 0) {
-                        errorMessage.style.display = 'block';
-                        errorMessage.textContent = `No stamps found for the category: ${ category }`;
-                    } else {
-                        // Render stamps
-                        stamps.forEach(stamp => {
-                            const stampElement = createStampElement(stamp);
-                            stampsList.insertAdjacentHTML('beforeend', stampElement);
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error loading stamps:', error);
-                    errorMessage.style.display = 'block';
-                    errorMessage.textContent = 'Error loading stamps';
-                }
+    async function loadStamps(category) {
+        try {
+            // Fetch stamps
+            const stamps = await fetchStamps(category);
+
+            // If no stamps are returned, display a message
+            if (stamps.length === 0) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = `No stamps found for the category: ${ category }`;
+            } else {
+                // Render stamps
+                stamps.forEach(stamp => {
+                    const stampElement = createStampElement(stamp);
+                    stampsList.insertAdjacentHTML('beforeend', stampElement);
+                });
             }
+        } catch (error) {
+            console.error('Error loading stamps:', error);
+            errorMessage.style.display = 'block';
+            errorMessage.textContent = 'Error loading stamps';
+        }
+    }
 
-            async function fetchStamps(category) {
-                try {
-                    const response = await fetch(`http://localhost:3000/api/stamps/${ category }`);
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch stamps');
-                    }
-                    const stamps = await response.json();
-                    console.log('Fetched stamps:', stamps);
-
-                    return Array.isArray(stamps) ? stamps : [];
-                } catch (error) {
-                    console.error('Error fetching stamps:', error);
-                    return [];
-                }
+    async function loadAllStamps() {
+        try {
+            // Fetch all stamps
+            const response = await fetch('http://localhost:3000/api/stamps/all');
+            if (!response.ok) {
+                throw new Error('Failed to fetch all stamps');
             }
+            const stamps = await response.json();
+            console.log('Fetched all stamps:', stamps);
 
-            function createStampElement(stamp) {
-                return `
-        <article class="listing-card">
-            <div class="listing-image">
-                <img src="${ stamp.image }" alt="${ stamp.name }">
-            </div>
-            <div class="listing-content">
-                <h3 class="listing-title">${ stamp.name }</h3>
-                <p class="listing-description">${ stamp.description }</p>
-                <div class="listing-price">$${ stamp.price }</div>
-                <button class="add-to-cart">
-                    <i class="fas fa-shopping-cart"></i> Add to Cart
-                </button>
-            </div>
-        </article>`;
+            // Render all stamps
+            if (stamps.length === 0) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'No stamps found.';
+            } else {
+                stamps.forEach(stamp => {
+                    const stampElement = createStampElement(stamp);
+                    stampsList.insertAdjacentHTML('beforeend', stampElement);
+                });
             }
-        </script>
+        } catch (error) {
+            console.error('Error fetching all stamps:', error);
+            errorMessage.style.display = 'block';
+            errorMessage.textContent = 'Error loading all stamps';
+        }
+    }
+
+    async function fetchStamps(category) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/stamps/${ category }`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch stamps');
+            }
+            const stamps = await response.json();
+            console.log('Fetched stamps:', stamps);
+
+            return Array.isArray(stamps) ? stamps : [];
+        } catch (error) {
+            console.error('Error fetching stamps:', error);
+            return [];
+        }
+    }
+
+    function createStampElement(stamp) {
+    return `
+    <a href="/stamps/details/${stamp.id}" class="listing-card">
+        <div class="listing-image">
+            <img src="${stamp.image}" alt="${stamp.name}">
+        </div>
+        <div class="listing-content">
+            <h3 class="listing-title">${stamp.name}</h3>
+            <p class="listing-description">${stamp.description}</p>
+            <div class="listing-price">$${stamp.price}</div>
+        </div>
+    </a>`;
+}
+
+</script>

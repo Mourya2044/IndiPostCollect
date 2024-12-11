@@ -1,10 +1,11 @@
-// routes/stampRoutes.js
 const express = require('express');
-const { getStamps } = require('../controllers/stampController');
-
 const router = express.Router();
+const { getStamps, getStampDetails } = require('../controllers/stampController');
 
-// Route for fetching stamps by category
+// Existing routes
 router.get('/:category', getStamps);
+
+// New route for stamp details
+router.get('/details/:id', getStampDetails);
 
 module.exports = router;

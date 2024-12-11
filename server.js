@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
-const auctionController = require('./controllers/auctionController');
 const stampRoutes = require('./routes/stampRoutes'); // Import stamp routesconfiguration
 
 const app = express();
@@ -30,7 +29,6 @@ mongoose.connect(dbURI)
 
 // Initialize controllers (make sure they use `io`)
 chatController(io);  // Pass `io` to your controller
-auctionController(io);  // Pass `io` to your auction controller
 
 let PORT = 3000;
 // Use `server.listen` instead of `app.listen`
@@ -45,7 +43,6 @@ app.get('/learn', (req, res) => res.render('learn'));
 app.get('/community', requireAuth, (req, res) => res.render('community'));
 app.get('/museum', (req, res) => res.render('museum'));
 app.get('/marketplace', requireAuth, (req, res) => res.render('marketplace'));
-// app.get('/auction', requireAuth, (req, res) => res.render('auction'));
 app.get('/events', requireAuth, (req, res) => res.render('events'));
 app.get('/user', requireAuth, (req, res) => res.render('user'));
 app.use(authRoutes);

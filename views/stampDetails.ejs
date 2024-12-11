@@ -1,0 +1,25 @@
+<%- include('partials/header'); -%>
+
+<div class="stamp-details-container">
+    <div class="stamp-image">
+        <img src="<%= stamp.image %>" alt="<%= stamp.name %>">
+    </div>
+    <div class="stamp-info">
+        <h1 class="stamp-title">
+            <%= stamp.name %>
+        </h1>
+        <p class="stamp-description">
+            <%= stamp.description %>
+        </p>
+        <p class="stamp-details">
+            <%= stamp.details %>
+        </p>
+        <div class="stamp-price">Price: $<%= stamp.price %>
+        </div>
+        <button class="add-to-cart">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+        </button>
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>
