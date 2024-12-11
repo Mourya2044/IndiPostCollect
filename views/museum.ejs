@@ -90,7 +90,7 @@
 
         async fetchStamps(category) {
             try {
-                const response = await fetch(`http://10.1.49.109:3000/api/stamps/${ category }`);
+                const response = await fetch(`http://localhost:3000/api/stamps/${ category }`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch stamps');
                 }
