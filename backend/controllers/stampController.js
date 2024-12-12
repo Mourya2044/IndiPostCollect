@@ -1,5 +1,5 @@
 // Mock stamp data
-const stampCollections = require('../public/stampCollecions.json');
+const stampCollections = require('../data/stampCollections.json');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const { Product, Cart } = require('../models/Cart');
