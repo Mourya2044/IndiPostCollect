@@ -4,6 +4,7 @@ const socketIo = require('socket.io');
 const chatController = require("./controllers/chatController");
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 const stampRoutes = require('./routes/stampRoutes'); // Import stamp routesconfiguration
@@ -47,4 +48,5 @@ app.get('/events', requireAuth, (req, res) => res.render('events'));
 app.get('/user', requireAuth, (req, res) => res.render('user'));
 app.get('/cart', requireAuth, (req, res) => res.render('cart'));
 app.use(authRoutes);
+app.use(userRoutes);
 app.use('/api/stamps', stampRoutes);

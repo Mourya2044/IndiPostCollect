@@ -4,10 +4,11 @@
     <div class="profile-header">
         <img src="https://via.placeholder.com/180" alt="Profile Picture">
         <div class="info">
-            <h2>Jayaditya Mondal</h2>
-            <p><strong>Email:</strong> jayaditya@google.com</p>
-            <p><strong>Contact:</strong> 9876543210</p>
-            <p><strong>Address:</strong> 123 Philately Lane, Stamp City</p>
+            <h2></h2>
+            <p><strong>Email:</strong> </p>
+            <p><strong>Contact:</strong> </p>
+            <p><strong>Address:</strong> </p>
+            <p><strong>Deposit:</strong> </p>
         </div>
     </div>
 
@@ -34,12 +35,22 @@
 <%- include('partials/footer'); -%>
 
 <script>
-    function showSubTab(tabId) {
-        document.querySelectorAll('.auction-tab-content').forEach(tab => {
-            tab.style.display = 'none';
+    async function getDetails() {
+        const res = await fetch('/userDetails', {
+            method: 'GET',
+            // body: JSON.stringify({ email, password }),
+            // headers: { 'Content-Type': 'application/json' }
         });
-        document.getElementById(tabId).style.display = 'block';
+        const data = await res.json();
+        document.querySelector('.profile-header h2').textContent = `${ data.firstname } ${ data.lastname }`;
+        document.querySelector('.profile-header .info p:nth-child(2)').innerHTML = `<strong>Email:</strong> ${ data.email || 'N/A' }`;
+        document.querySelector('.profile-header .info p:nth-child(3)').innerHTML = `<strong>Contact:</strong> ${ data.mobile }`;
+        document.querySelector('.profile-header .info p:nth-child(4)').innerHTML = `<strong>Address:</strong> ${ data.address }, ${ data.city }, ${ data.state }, ${ data.pincode }`;
+        document.querySelector('.profile-header .info p:nth-child(5)').innerHTML = `<strong>Deposit:</strong> ₹ ${ data.deposit || 'N/A' }`;
     }
+
+    getDetails();
+        
 </script>
 
 <style>
