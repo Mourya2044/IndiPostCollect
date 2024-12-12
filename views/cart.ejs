@@ -1,0 +1,235 @@
+<%- include('partials/header'); -%>
+
+<h1>Your Cart</h1>
+  <div id="cart" class="cart-container"></div>
+  <div class="total-price" id="total-price">Total: Rs 0</div>
+  <div class="cart-actions">
+    <button onclick="checkoutCart()">Checkout</button>
+  </div>
+
+  <%- include('partials/footer'); -%>
+
+  <script>
+    const cartContainer = document.getElementById('cart');
+    const totalPriceElement = document.getElementById('total-price');
+
+    // Sample initial cart items
+    const initialCartItems = [
+      {
+        name: 'George VI Dak Runner Stamp',
+        description: 'Issued in 1937, highlighting traditional mail delivery methods in India.',
+        image: 'https://placehold.co/200',
+        price: 35,
+        quantity: 1
+      },
+      {
+        name: '3 Annas King George VI Stamp',
+        description: 'A collectible from 1937 featuring King George VI.',
+        image: 'https://placehold.co/200',
+        price: 1000,
+        quantity: 1
+      },
+      {
+        name: 'India 3a Yellow-Green 1937',
+        description: 'A definitive issue stamp in a yellow-green shade.',
+        image: 'https://placehold.co/200',
+        price: 700,
+        quantity: 1
+      }
+    ];
+
+    // Render the cart items
+    function renderCart(items) {
+      cartContainer.innerHTML = '';
+      let total = 0;
+
+      if (items.length === 0) {
+        cartContainer.innerHTML = '<p class="empty-message">Your cart is empty.</p>';
+      } else {
+        items.forEach((item, index) => {
+          total += item.price * item.quantity;
+
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'cart-item';
+
+          itemDiv.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" />
+            <div class="cart-item-details">
+              <h2>${item.name}</h2>
+              <p>${item.description}</p>
+              <p>Price: Rs ${item.price}</p>
+              <p>
+                Quantity: 
+                <input 
+                  type="number" 
+                  value="${item.quantity}" 
+                  min="1" 
+                  onchange="updateQuantity(${index}, this.value)" 
+                  style="width: 50px; padding: 5px;"
+                />
+              </p>
+            </div>
+            <div class="cart-item-actions">
+              <button onclick="removeFromCart(${index})">Remove</button>
+            </div>
+          `;
+          cartContainer.appendChild(itemDiv);
+        });
+      }
+
+      totalPriceElement.innerHTML = `Total: Rs ${total}`;
+    }
+
+    // Fetch items from the backend
+    async function fetchCartItems() {
+      // Simulate backend fetch with initial items
+      renderCart(initialCartItems);
+    }
+
+    // Remove an item from the cart
+    async function removeFromCart(index) {
+      initialCartItems.splice(index, 1);
+      alert('Item removed from cart');
+      renderCart(initialCartItems);
+    }
+
+    // Update the quantity of an item
+    function updateQuantity(index, newQuantity) {
+      newQuantity = parseInt(newQuantity);
+      if (newQuantity > 0) {
+        initialCartItems[index].quantity = newQuantity;
+        renderCart(initialCartItems);
+      } else {
+        alert('Quantity must be at least 1.');
+      }
+    }
+
+    // Checkout the cart
+    async function checkoutCart() {
+      const totalItems = initialCartItems.length;
+      if (totalItems > 0) {
+        alert(`Checkout complete. ${totalItems} item(s) purchased.`);
+        initialCartItems.length = 0; // Clear the cart
+        renderCart(initialCartItems);
+      } else {
+        alert('Your cart is empty.');
+      }
+    }
+
+    // Load cart items on page load
+    fetchCartItems();
+  </script>
+
+<style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 20px 0;
+      color: #444;
+      font-size: 2.5em;
+    }
+
+    .cart-container {
+      width: 90%;
+      max-width: 800px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 15px;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item img {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+    }
+
+    .cart-item-details {
+      flex-grow: 1;
+    }
+
+    .cart-item-details h2 {
+      margin: 0;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    .cart-item-details p {
+      margin: 5px 0;
+      color: #666;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .cart-item-actions button {
+      padding: 10px 15px;
+      background: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .cart-item-actions button:hover {
+      background: #d32f2f;
+    }
+
+    .cart-actions {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .cart-actions button {
+      padding: 15px 20px;
+      background: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    .cart-actions button:hover {
+      background: #388e3c;
+    }
+
+    .total-price {
+      text-align: right;
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .empty-message {
+      text-align: center;
+      font-size: 1.2em;
+      color: #777;
+    }
+  </style>

@@ -45,5 +45,6 @@ app.get('/museum', (req, res) => res.render('museum'));
 app.get('/marketplace', requireAuth, (req, res) => res.render('marketplace'));
 app.get('/events', requireAuth, (req, res) => res.render('events'));
 app.get('/user', requireAuth, (req, res) => res.render('user'));
+app.get('/cart', requireAuth, (req, res) => res.render('cart'));
 app.use(authRoutes);
 app.use('/api/stamps', stampRoutes);
