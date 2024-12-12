@@ -879,6 +879,7 @@ html {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
+    margin-top: 3rem;
 }
 
 .stamp-image img {
@@ -907,7 +908,7 @@ html {
 .stamp-price {
     font-size: 1.5em;
     font-weight: bold;
-    color: #007bff;
+    color: var(--secondary-color);
     margin-bottom: 20px;
 }
 
@@ -915,12 +916,12 @@ html {
     padding: 10px 20px;
     font-size: 1.2em;
     color: #fff;
-    background-color: #007bff;
+    background-color: var(--secondary-color);
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .add-to-cart:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-color);
 }
