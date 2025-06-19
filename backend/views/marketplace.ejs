@@ -141,7 +141,7 @@
     async function loadAllStamps() {
         try {
             // Fetch all stamps
-            const response = await fetch('http://localhost:3000/api/stamps/all');
+            const response = await fetch('/api/stamps/all');
             if (!response.ok) {
                 throw new Error('Failed to fetch all stamps');
             }
@@ -167,7 +167,7 @@
 
     async function fetchStamps(category) {
         try {
-            const response = await fetch(`http://localhost:3000/api/stamps/${ category }`);
+            const response = await fetch(`/api/stamps/${ category }`);
             if (!response.ok) {
                 throw new Error('Failed to fetch stamps');
             }

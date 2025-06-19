@@ -26,7 +26,7 @@ chatController(io); // Pass `io` to chat controller
 
 // Middleware
 app.use(express.static('public'));
-app.use(cors({ origin: 'http://localhost:3000', credentials: true })); // Adjust the origin to your frontend URL
+// app.use(cors({ origin: 'http://localhost:3000', credentials: true })); // Adjust the origin to your frontend URL
 app.use(express.json());
 app.use(cookieParser());
 
